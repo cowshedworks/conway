@@ -72,7 +72,7 @@ class Cell
             return self::ALIVE;
         }
 
-        return self::ALIVE;
+        return $this->getState();
     }
 
     /**

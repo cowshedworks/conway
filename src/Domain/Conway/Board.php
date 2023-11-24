@@ -33,7 +33,7 @@ class Board
     {
         for ($x = 0; $x < self::LIMIT; $x++) {
             for($y = 0; $y < self::LIMIT; $y++) {
-                $this->board[$x][$y] = new Cell($x, $y, (int) $cachedBoard[$x][$y], self::LIMIT-1);
+                $this->board[$x][$y] = new Cell($x, $y, $cachedBoard[$x][$y], self::LIMIT-1);
             }
         }
     }
@@ -41,8 +41,9 @@ class Board
     private function build(): void
     {
         for ($x = 0; $x < self::LIMIT; $x++) {
+            $state = 0;
             for($y = 0; $y < self::LIMIT; $y++) {
-                $state = (int) (rand(0,100) > 99);
+                $state = (int) (rand(0,100) > 1);
                 $this->board[$x][$y] = new Cell($x, $y, $state, self::LIMIT-1);
             }
         }
@@ -50,13 +51,11 @@ class Board
 
     public function render(): array
     {
-        $this->compute();
-
         $rendered = [];
         
         for ($x = 0; $x < self::LIMIT; $x++) {
             for($y = 0; $y < self::LIMIT; $y++) {
-                $rendered[$x][$y] = (string) $this->board[$x][$y];
+                $rendered[$x][$y] = $this->board[$x][$y]->getState();
             }
         }
 
