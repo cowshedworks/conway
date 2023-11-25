@@ -22,24 +22,22 @@ class RenderBoard extends Action
 
         $cachedBoard = unserialize(file_get_contents($cacheFile));
 
-        $computedBoard = (new Board($cachedBoard))->compute();
+        $computedBoard = (new Board(100, $cachedBoard))->compute();
 
-        $board = $computedBoard->render();
+        file_put_contents($cacheFile, serialize($computedBoard));
 
-        file_put_contents($cacheFile, serialize($board));
-
-        return $this->respondWithHtml($this->getHtml($board));
+        return $this->respondWithHtml($this->getHtml($computedBoard));
     }
 
-    private function getHtml($board): string
+    private function getHtml(Board $board): string
     {
-        $limit = Board::LIMIT;
+        $limit = $board->getLimit();
 
         $html = "<table border='0'>";
         for ($x = 0; $x < $limit; $x++) {
             $html .= "<tr>";
             for($y = 0; $y < $limit; $y++) {
-                $html .= "<td style='border:1; padding:5px; background-color:". (($board[$x][$y] == 0) ? "#ffffff" : "#000000").";'><//td>";
+                $html .= "<td style='border:1; padding:5px; background-color:". (($board[$x][$y]->getState() === 0) ? "#ffffff" : "#000000").";'><//td>";
             }
             $html .= "</tr>";
         }

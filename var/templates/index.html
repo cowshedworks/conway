@@ -9,14 +9,14 @@
     <h1>Conway's Game of Life</h1>
 </body>
 
-<div hx-get="/api/board" hx-trigger="every 0.5s">
+<div hx-get="/api/board" hx-trigger="every 0.75s">
     Test
 </div>
 
 <br><br>
 
 <button hx-post="/api/cache-delete" hx-swap="innerHTML">
-    Delete Cached State
+    Clear Cache
 </button>
 
 </html>

@@ -16,6 +16,6 @@ class DeleteCache extends Action
         $cacheFile = '../var/cache/board.cache';
         unlink($cacheFile);
 
-        return $this->respondWithHtml('Done: Delete Again');
+        return $this->respondWithHtml('Clear Cache');
     }
 }
