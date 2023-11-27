@@ -67,22 +67,14 @@ class Cell
 
         $aliveCount = count($totalAlive);
 
+        if ($this->isAlive() && ($aliveCount == 2 || $aliveCount == 3)) {
+            return self::ALIVE;
+        }
+
         if ($this->isDead() && $aliveCount === 3) {
             return self::ALIVE;
         }
 
-        if ($this->isAlive() && ($aliveCount === 1 || $aliveCount === 0)) {
-            return self::DEAD;
-        }
-
-        if ($this->isAlive() && $aliveCount >= 4) {
-            return self::DEAD;
-        }
-
-        if ($aliveCount < 4 && $aliveCount > 1) {
-            return self::ALIVE;
-        }
-
-        return $this->getState();
+        return self::DEAD;
     }
 }

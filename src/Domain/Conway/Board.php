@@ -83,10 +83,11 @@ class Board implements ArrayAccess, JsonSerializable
 
     private function build(): void
     {
+        mt_srand(105);
         for ($x = 0; $x < $this->getSize(); $x++) {
             $state = 0;
             for($y = 0; $y < $this->getSize(); $y++) {
-                $state = (int) (rand(0,1000) > 995);
+                $state = (int) (rand(0,1000) > 940);
                 $this->board[$x][$y] = new Cell($x, $y, $state, $this->getSize()-1);
             }
         }
